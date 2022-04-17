@@ -68,6 +68,9 @@ class Level:
 
     def udpate(self):
         self.player.update()
+
+        camera_x = max(0, self.player.pos.x - 3 * px.TILE_SIZE)
+        px.camera(camera_x, self.pos.y)
     
     def victory(self):
         return self.pos.y >= self.goaly
