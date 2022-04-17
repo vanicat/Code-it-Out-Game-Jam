@@ -5,8 +5,9 @@ from lib import Pos
 
 class Player:
     IMGX = 0
-    IMGY = 0
-    SIZE = px.TILE_SIZE * 2
+    IMGY = px.TILE_SIZE * 2
+    HEIGHT = px.TILE_SIZE * 2
+    WIDTH  = px.TILE_SIZE
     GRAVITY = Pos(0, 2)
     JUMP = Pos(0, -6)
     NB_JUMP = 2
@@ -84,11 +85,11 @@ class Player:
 
     @property
     def bottom(self):
-        return self.pos.y + self.SIZE
+        return self.pos.y + self.HEIGHT
 
     @bottom.setter
     def bottom(self, y):
-        self.pos.y = y - self.SIZE
+        self.pos.y = y - self.HEIGHT
 
     @property
     def top(self):
@@ -100,10 +101,11 @@ class Player:
     
     @property
     def right(self):
-        return self.pos.x + self.SIZE
+        return self.pos.x + self.WIDTH
 
     def draw(self):
-        px.blt(self.pos.x, self.pos.y, 0, self.IMGX, self.IMGY, self.SIZE, self.SIZE, px.COLOR_BLACK)
+        nbimg = (px.frame_count // 4) % 3
+        px.blt(self.pos.x, self.pos.y, 0, self.IMGX + self.WIDTH * nbimg, self.IMGY, self.WIDTH, self.HEIGHT, px.COLOR_BLACK)
 
 
 if __name__ == "__main__":
