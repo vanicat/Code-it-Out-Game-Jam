@@ -6,10 +6,12 @@ from lib import Pos, posT, Rectangle
 import player
 
 class Plateform:
-    def __init__(self, imgs: Pos, pos:Pos, width: int) -> None:
+    def __init__(self, imgs: Pos, pos:Pos, width: int, ended = True) -> None:
         self.imgs = px.TILE_SIZE * imgs
         self.pos = px.TILE_SIZE * pos
         self.width = width
+        self.ended = ended
+
         self.rect = Rectangle(self.pos, self.width * px.TILE_SIZE, px.TILE_SIZE)
 
     def udpate(self) -> None:
@@ -18,9 +20,10 @@ class Plateform:
     def draw(self) -> None:
         px.blt(self.pos.x, self.pos.y,
             1, self.imgs.x, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
-        for i in range(1, self.width - 1):
+        for i in range(1, self.width - int(self.ended)):
             px.blt(self.pos.x + px.TILE_SIZE * i, self.pos.y,
                 1, self.imgs.x + px.TILE_SIZE, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
+        if self.ended:
         px.blt(self.pos.x + (self.width - 1) * px.TILE_SIZE, self.pos.y,
                1, self.imgs.x + px.TILE_SIZE * 2, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
 
@@ -68,7 +71,8 @@ class Level:
                     plt_start = False
 
                 elif tile == (4, 1):
-                    self.killer.append(Plateform(Pos(4, 1), Pos(u, v), 255))
+                    self.killer.append(Plateform(Pos(4, 1), Pos(u, v), 255, False))
+
 
                 elif tile == (0, 1):
                     self.init_player = px.TILE_SIZE * Pos(u, v)
