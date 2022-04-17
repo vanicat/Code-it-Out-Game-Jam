@@ -44,12 +44,13 @@ class Level:
             self.tilemap = tilemap
         self.goaly = goaly
 
+    
+    def start(self):
+        px.load("assets/main.pyxres")
         self.plateform = []
         self.killer = []
 
         self.init_from_tile_map()
-    
-    def start(self):
         self.pos = Pos(0, 0)
         self.player.reset()
 
