@@ -30,3 +30,54 @@ class Pos:
 def posT(t):
     x, y = t
     return Pos(x, y)
+
+
+class Rectangle:
+    def __init__(self, *args):
+        """*args must contain upper left coin and width and heigs
+        
+Both can be given as an tupple or a two number"""
+        args = iter(args)
+        n = next(args)
+        if isinstance(n, tuple) or isinstance(n, Pos):
+            self.x, self.y = n
+        else: # Need to be a number
+            self.x = n
+            self.y = next(args)
+        
+        n = next(args)
+        if isinstance(n, tuple) or isinstance(n, Pos):
+            self.w, self.h = n
+        else: # Need to be a number
+            self.w = n
+            self.h = next(args)
+
+    @property
+    def bottom(self):
+        return self.y + self.h
+    
+    @property
+    def top(self):
+        return self.y
+
+    @property
+    def right(self):
+        return self.x + self.w
+    
+    @property
+    def left(self):
+        return self.x
+
+    def contain(self, p: Pos):
+        return (
+            self.left <= p.x < self.right and 
+            self.top <= p.y < self.bottom 
+        )
+
+    def under(self, rect: "Rectangle"):
+        return (
+            rect.left <= self.right and 
+            rect.right >= self.left and 
+            self.top - 1 <= rect.bottom <= self.bottom
+        )
+

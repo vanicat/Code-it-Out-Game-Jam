@@ -1,6 +1,7 @@
 import pyxel as px
 
 from level import Level
+
 class App:
     def __init__(self):
         px.init(160, 120)

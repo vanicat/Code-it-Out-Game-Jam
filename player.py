@@ -14,11 +14,15 @@ class Player:
         self.rect = self
 
     def update(self):
-        if self.falling():
+        self.falling = True
+        
+        for plt in self.level.plateform:
+            if plt.rect.under(self):
+                self.falling = False
+                self.bottom = plt.rect.top
+        
+        if self.falling:
             self.pos += self.GRAVITY
-
-    def falling(self):
-        return True
 
     @property
     def bottom(self):
@@ -39,6 +43,7 @@ class Player:
     @property
     def right(self):
         return self.pos.x + self.SIZE
+
     def draw(self):
         px.blt(self.pos.x, self.pos.y, 0, self.IMGX, self.IMGY, self.SIZE, self.SIZE, px.COLOR_BLACK)
 
