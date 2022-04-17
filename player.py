@@ -1,5 +1,5 @@
 import pyxel as px
-#from level import Level
+import level
 
 from lib import Pos
 
@@ -13,8 +13,9 @@ class Player:
     JUMP_GRAVITY = 0.5
     START_SPEED = Pos(2, 0)
 
-    def __init__(self, pos, level: "Level"):
-        self.pos = pos
+    def __init__(self, pos, level: "level.Level"):
+        self.init_pos = pos
+        self.pos = pos.copy()
         self.level = level
         self.rect = self
 
@@ -24,6 +25,9 @@ class Player:
         self.jump_left = self.NB_JUMP
 
         self.started = False
+
+    def reset(self):
+        self.pos = self.init_pos.copy()
 
     def start(self):
         self.started = True
@@ -38,6 +42,11 @@ class Player:
                     self.jump = None
                     self.jump_left = self.NB_JUMP
                     self.bottom = plt.rect.top
+
+
+            for kill in self.level.killer:
+                if kill.rect.under(self):
+                    self.reset()
 
             if self.falling:
                 self.pos += self.GRAVITY
