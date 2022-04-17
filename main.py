@@ -8,7 +8,7 @@ class App:
         px.init(160, 120)
         px.load("main.pyxres")
 
-        self.levels = [menu.MainMenu(), level.Level(0, 250)]
+        self.levels = [menu.MainMenu(), level.Level(0, 250), menu.Victory()]
         self._curlevel = 0
 
         px.run(self.update, self.draw)
@@ -23,7 +23,7 @@ class App:
             if self._curlevel + 1 < len(self.levels):
                 self._curlevel += 1
             else:
-                pass # victory !
+                self._curlevel = 0
 
     def draw(self):
         px.cls(0)

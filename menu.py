@@ -41,3 +41,21 @@ class MainMenu:
 
     def defeat(self):
         return False
+
+class Victory:
+    def __init__(self) -> None:
+        self.again = False
+
+    def draw(self):
+        px.text(10, 50, "Victory !", px.COLOR_RED)
+        px.text(10, 60, "Space to start agaim", px.COLOR_RED)
+
+    def udpate(self):
+        if px.btnp(px.KEY_SPACE):
+            self.again = True
+
+    def victory(self):
+        return self.again
+
+    def defeat(self):
+        return False
