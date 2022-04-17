@@ -1,13 +1,14 @@
 import pyxel as px
 
-from level import Level
+import level
+import menu 
 
 class App:
     def __init__(self):
         px.init(160, 120)
         px.load("main.pyxres")
 
-        self.levels = [Level(0, 250)]
+        self.levels = [menu.MainMenu(), level.Level(0, 250)]
         self._curlevel = 0
 
         px.run(self.update, self.draw)
