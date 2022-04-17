@@ -49,6 +49,7 @@ class Player:
             for kill in self.level.killer:
                 if kill.collide(self):
                     self.reset()
+                    px.play(0, 1)
 
             if self.level.target.collide(self):
                 self.victory = True
@@ -60,6 +61,7 @@ class Player:
 
             if px.btnp(px.KEY_SPACE) and (not self.falling or self.jump_left > 0):
                 self.jump = self.JUMP.copy()
+                px.play(0, 0)
                 self.jump_left -= 1
 
             if self.jump is not None:
