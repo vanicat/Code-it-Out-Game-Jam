@@ -9,7 +9,7 @@ class Plateform:
         self.imgs = imgs
         self.pos = pos
         self.width = width
-        self.rect = Rectangle(self.pos, self.width * px.TILE_SIZE, self.width * px.TILE_SIZE)
+        self.rect = Rectangle(self.pos, self.width * px.TILE_SIZE, px.TILE_SIZE)
 
     def udpate(self) -> None:
         pass
