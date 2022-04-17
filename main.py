@@ -26,4 +26,5 @@ class App:
         px.cls(0)
         self.curlevel().draw()
 
-App()    
+if __name__ == "__main__":
+    App()

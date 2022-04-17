@@ -48,3 +48,9 @@ class Level:
     
     def vitory(self):
         return self.pos.y >= self.goaly
+
+
+if __name__ == "__main__":
+    import main
+
+    main.App()
