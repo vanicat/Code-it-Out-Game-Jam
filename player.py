@@ -13,11 +13,13 @@ class Player:
     NB_JUMP = 2
     JUMP_GRAVITY = 0.5
     START_SPEED = Pos(2, 0)
+    GROW_ON_FAIL = 1/8
 
     def __init__(self, pos, level: "level.Level"):
         self.init_pos = pos
         self.level = level
         self.rect = self
+        self.last_plt = None
 
         self.reset()
 
@@ -32,7 +34,7 @@ class Player:
         self.started = False
         self.victory = False
         if full:
-            self.life = 3
+            self.life = 10
 
     def start(self):
         self.started = True
@@ -52,12 +54,14 @@ class Player:
                     self.jump = None
                     self.jump_left = self.NB_JUMP
                     self.bottom = plt.rect.top
+                    self.last_plt = plt
 
 
             for kill in self.level.killer:
                 if kill.collide(self):
                     self.reset()
                     px.play(0, 1)
+                    self.last_plt.width += self.GROW_ON_FAIL
                     self.life -= 1
 
             if self.level.target.collide(self):

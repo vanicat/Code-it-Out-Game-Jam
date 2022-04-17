@@ -11,7 +11,9 @@ class Plateform:
         self.width = width
         self.ended = ended
 
-        self.rect = Rectangle(self.pos, self.width * px.TILE_SIZE, px.TILE_SIZE)
+    @property
+    def rect(self):
+        return Rectangle(self.pos, self.width * px.TILE_SIZE, px.TILE_SIZE)
 
     def udpate(self) -> None:
         pass
@@ -19,7 +21,7 @@ class Plateform:
     def draw(self) -> None:
         px.blt(self.pos.x, self.pos.y,
             1, self.imgs.x, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
-        for i in range(1, self.width - int(self.ended)):
+        for i in range(1, px.ceil(self.width) - int(self.ended)):
             px.blt(self.pos.x + px.TILE_SIZE * i, self.pos.y,
                 1, self.imgs.x + px.TILE_SIZE, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
         if self.ended:
