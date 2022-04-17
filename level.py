@@ -47,6 +47,7 @@ class Level:
     
     def start(self):
         self.pos = Pos(0, 0)
+        self.player.reset()
 
     def init_from_tile_map(self):
         plt_start = False
