@@ -7,15 +7,23 @@ class App:
         px.load("main.pyxres")
 
         self.levels = [Level(0, 10, 10, 250)]
-        self.curlevel = 0
+        self._curlevel = 0
 
         px.run(self.update, self.draw)
+    
+    def curlevel(self):
+        return self.levels[self._curlevel]
 
     def update(self):
-        pass
+        self.curlevel().udpate()
+        if self.curlevel().vitory():
+            if self._curlevel + 1 < len(self.levels):
+                self._curlevel += 1
+            else:
+                pass # victory !
 
     def draw(self):
         px.cls(0)
-        self.levels[self.curlevel].draw()
-        
+        self.curlevel().draw()
+
 App()    
