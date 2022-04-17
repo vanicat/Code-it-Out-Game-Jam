@@ -1,7 +1,7 @@
 import pyxel as px
 from typing import Union
 
-from lib import Pos, posT
+from lib import Pos, posT, Rectangle
 from player import Player
 
 class Plateform:
@@ -9,6 +9,7 @@ class Plateform:
         self.imgs = imgs
         self.pos = pos
         self.width = width
+        self.rect = Rectangle(self.pos, self.width * px.TILE_SIZE, self.width * px.TILE_SIZE)
 
     def udpate(self) -> None:
         pass
