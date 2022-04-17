@@ -22,3 +22,7 @@ class Pos:
         self.x *= l
         self.y *= l
         return self
+
+def posT(t):
+    x, y = t
+    return Pos(x, y)
