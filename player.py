@@ -50,6 +50,9 @@ class Player:
                 if kill.rect.under(self):
                     self.reset()
 
+            if self.level.target.collide(self):
+                self.victory = True
+
             if self.falling:
                 self.pos += self.GRAVITY
 
