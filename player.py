@@ -21,7 +21,7 @@ class Player:
         self.reset()
 
 
-    def reset(self):
+    def reset(self, full = False):
         self.pos = self.init_pos.copy()
         self.speed = self.START_SPEED.copy()
 
@@ -30,6 +30,8 @@ class Player:
 
         self.started = False
         self.victory = False
+        if full:
+            self.life = 3
 
     def start(self):
         self.started = True
@@ -55,6 +57,7 @@ class Player:
                 if kill.collide(self):
                     self.reset()
                     px.play(0, 1)
+                    self.life -= 1
 
             if self.level.target.collide(self):
                 self.victory = True

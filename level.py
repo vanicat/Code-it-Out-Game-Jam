@@ -52,7 +52,7 @@ class Level:
 
         self.init_from_tile_map()
         self.pos = Pos(0, 0)
-        self.player.reset()
+        self.player.reset(True)
 
     def init_from_tile_map(self):
         plt_start = False
@@ -107,6 +107,9 @@ class Level:
     
     def victory(self):
         return self.player.victory
+
+    def defeat(self):
+        return self.player.life == 0
 
 
 if __name__ == "__main__":
