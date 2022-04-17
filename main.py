@@ -18,6 +18,12 @@ class App:
     def curlevel(self):
         return self.levels[self._curlevel]
 
+    @curlevel.setter
+    def curlevel(self, new):
+        self._curlevel = new
+        px.camera()
+        self.curlevel.start()
+
     def update(self):
         self.curlevel.udpate()
         if self.curlevel.victory():
