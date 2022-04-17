@@ -1,7 +1,11 @@
 from platform import release
 import pyxel as px
+from lib import Number
 
 class MainMenu:
+    starting_time: Number
+    selected: int
+
     def __init__(self) -> None:
         self.action = [self.start_game, self.quit]
 
@@ -13,7 +17,7 @@ class MainMenu:
         px.text(10, 50, "start game", px.COLOR_RED)
         px.text(10, 60, "quit", px.COLOR_RED)
 
-    def udpate(self):
+    def udpate(self) -> None:
         if px.frame_count > self.starting_time + 5:
             if px.btnp(px.KEY_SPACE):
                 self.start_press = px.frame_count
@@ -29,41 +33,41 @@ class MainMenu:
                 if time < 10:
                     self.action[self.selected]()
 
-    def start_game(self):
+    def start_game(self) -> None:
         self.started = True
 
-    def quit(self):
+    def quit(self) -> None:
         px.quit()
 
-    def start(self):
+    def start(self) -> None:
         self.selected = 0
 
         self.started = False
         self.starting_time = px.frame_count
 
-    def victory(self):
+    def victory(self) -> bool:
         return self.started
 
-    def defeat(self):
+    def defeat(self) -> bool:
         return False
 
 class Victory:
     def __init__(self) -> None:
         pass
 
-    def draw(self):
+    def draw(self) -> None:
         px.text(10, 50, "Victory !", px.COLOR_RED)
         px.text(10, 60, "Space to start agaim", px.COLOR_RED)
 
-    def udpate(self):
+    def udpate(self) -> None:
         if px.btnp(px.KEY_SPACE):
             self.again = True
 
-    def victory(self):
+    def victory(self) -> bool:
         return self.again
 
-    def defeat(self):
+    def defeat(self) -> bool:
         return False
 
-    def start(self):
+    def start(self) -> None:
         self.again = False

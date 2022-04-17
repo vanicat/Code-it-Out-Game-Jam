@@ -1,6 +1,5 @@
-from turtle import pos
 import pyxel as px
-from typing import Union
+from typing import Union, List
 
 from lib import Pos, posT, Rectangle
 import player
@@ -35,6 +34,9 @@ class Plateform:
 
 class Level:
     IGNORE_TILE = [(0, 0), (4, 0)]
+    plateform: List[Plateform]
+    killer: List[Plateform]
+
     def __init__(self, tilemap: Union[px.Tilemap, int], goaly: float):
         if isinstance(tilemap, int):
             self.tilemap = px.tilemap(tilemap)
