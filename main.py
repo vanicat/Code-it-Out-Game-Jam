@@ -6,7 +6,7 @@ class App:
         px.init(160, 120)
         px.load("main.pyxres")
 
-        self.levels = [Level(0, 10, 10, 250)]
+        self.levels = [Level(0, 250)]
         self._curlevel = 0
 
         px.run(self.update, self.draw)
