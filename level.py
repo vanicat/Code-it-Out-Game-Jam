@@ -5,7 +5,7 @@ from typing import Union
 class Plateform:
     def __init__(self, imgs: Pos, pos:Pos, width: int) -> None:
         self.imgs = imgs
-        self.pos = px.TILE_SIZE * pos
+        self.pos = pos
         self.width = width
 
     def udpate(self) -> None:
