@@ -27,12 +27,9 @@ class App:
     def update(self):
         self.curlevel.udpate()
         if self.curlevel.victory():
-            if self._curlevel + 1 < len(self.levels):
-                self._curlevel += 1
-            else:
-                self._curlevel = 0
-            px.camera()
-            self.curlevel.start()
+            self.curlevel = (self._curlevel + 1) % len(self.levels)
+        elif self.curlevel.defeat():
+            self.curlevel = 0
 
     def draw(self):
         px.cls(0)
