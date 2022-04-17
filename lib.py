@@ -27,6 +27,9 @@ class Pos:
         yield self.x
         yield self.y
 
+    def copy(self):
+        return Pos(self.x, self.y)
+
 def posT(t):
     x, y = t
     return Pos(x, y)
