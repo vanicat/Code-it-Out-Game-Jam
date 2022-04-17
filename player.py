@@ -15,19 +15,21 @@ class Player:
 
     def __init__(self, pos, level: "level.Level"):
         self.init_pos = pos
-        self.pos = pos.copy()
         self.level = level
         self.rect = self
 
+        self.reset()
+
+
+    def reset(self):
+        self.pos = self.init_pos.copy()
         self.speed = self.START_SPEED.copy()
 
         self.jump = None
         self.jump_left = self.NB_JUMP
 
         self.started = False
-
-    def reset(self):
-        self.pos = self.init_pos.copy()
+        self.victory = False
 
     def start(self):
         self.started = True
