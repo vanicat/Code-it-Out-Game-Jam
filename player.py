@@ -12,6 +12,8 @@ class Player:
         self.pos = pos
         self.level = level
         self.rect = self
+        self.speed = Pos(2, 0)
+        self.jump = None
 
     def update(self):
         self.falling = True
@@ -23,6 +25,8 @@ class Player:
         
         if self.falling:
             self.pos += self.GRAVITY
+
+        self.pos += self.speed
 
     @property
     def bottom(self):
