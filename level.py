@@ -76,7 +76,7 @@ class Level:
             self.pos.x += 1
         self.player.update()
     
-    def vitory(self):
+    def victory(self):
         return self.pos.y >= self.goaly
 
 

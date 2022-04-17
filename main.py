@@ -17,7 +17,7 @@ class App:
 
     def update(self):
         self.curlevel().udpate()
-        if self.curlevel().vitory():
+        if self.curlevel().victory():
             if self._curlevel + 1 < len(self.levels):
                 self._curlevel += 1
             else:
