@@ -23,6 +23,10 @@ class Pos:
         self.y *= l
         return self
 
+    def __iter__(self):
+        yield self.x
+        yield self.y
+
 def posT(t):
     x, y = t
     return Pos(x, y)
