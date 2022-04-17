@@ -11,39 +11,51 @@ class Player:
     JUMP = Pos(0, -6)
     NB_JUMP = 2
     JUMP_GRAVITY = 0.5
+    START_SPEED = Pos(2, 0)
 
     def __init__(self, pos, level: "Level"):
         self.pos = pos
         self.level = level
         self.rect = self
-        self.speed = Pos(2, 0)
+
+        self.speed = self.START_SPEED.copy()
+
         self.jump = None
         self.jump_left = self.NB_JUMP
 
+        self.started = False
+
+    def start(self):
+        self.started = True
+
     def update(self):
-        self.falling = True
+        if self.started:
+            self.falling = True
 
-        for plt in self.level.plateform:
-            if plt.rect.under(self):
-                self.falling = False
-                self.jump = None
-                self.jump_left = self.NB_JUMP
-                self.bottom = plt.rect.top
+            for plt in self.level.plateform:
+                if plt.rect.under(self):
+                    self.falling = False
+                    self.jump = None
+                    self.jump_left = self.NB_JUMP
+                    self.bottom = plt.rect.top
 
-        if self.falling:
-            self.pos += self.GRAVITY
+            if self.falling:
+                self.pos += self.GRAVITY
 
-        self.pos += self.speed
+            self.pos += self.speed
 
-        if px.btnp(px.KEY_SPACE) and (not self.falling or self.jump_left > 0):
-            self.jump = self.JUMP.copy()
-            self.jump_left -= 1
+            if px.btnp(px.KEY_SPACE) and (not self.falling or self.jump_left > 0):
+                self.jump = self.JUMP.copy()
+                self.jump_left -= 1
 
-        if self.jump is not None:
-            self.pos += self.jump
-            self.jump.y += self.JUMP_GRAVITY
-            if self.jump.y > 0:
-                self.jump = None
+            if self.jump is not None:
+                self.pos += self.jump
+                self.jump.y += self.JUMP_GRAVITY
+                if self.jump.y > 0:
+                    self.jump = None
+        else:
+            if px.btnp(px.KEY_SPACE):
+                self.start()
 
     @property
     def bottom(self):
