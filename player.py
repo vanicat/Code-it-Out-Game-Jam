@@ -11,6 +11,7 @@ class Player:
     def __init__(self, pos, level: "Level"):
         self.pos = pos
         self.level = level
+        self.rect = self
 
     def update(self):
         if self.falling():
@@ -19,6 +20,25 @@ class Player:
     def falling(self):
         return True
 
+    @property
+    def bottom(self):
+        return self.pos.y + self.SIZE
+
+    @bottom.setter
+    def bottom(self, y):
+        self.pos.y = y - self.SIZE
+
+    @property
+    def top(self):
+        return self.pos.y
+        
+    @property
+    def left(self):
+        return self.pos.x
+    
+    @property
+    def right(self):
+        return self.pos.x + self.SIZE
     def draw(self):
         px.blt(self.pos.x, self.pos.y, 0, self.IMGX, self.IMGY, self.SIZE, self.SIZE, px.COLOR_BLACK)
 
