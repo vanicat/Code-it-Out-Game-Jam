@@ -73,7 +73,7 @@ class Level:
                 elif tile == (3, 0):
                     assert plt_start, f"end without start ({u}, {v})"
                     # stop of a plateform
-                    self.plateform.append(Plateform(Pos(1, 0), plt_start, plt_width))
+                    self.plateform.append(Plateform(Pos(1, 0), plt_start, plt_width + 1))
                     plt_start = False
 
                 elif tile == (4, 1):
