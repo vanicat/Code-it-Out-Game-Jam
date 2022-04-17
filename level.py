@@ -24,12 +24,12 @@ class Plateform:
             px.blt(self.pos.x + px.TILE_SIZE * i, self.pos.y,
                 1, self.imgs.x + px.TILE_SIZE, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
         if self.ended:
-        px.blt(self.pos.x + (self.width - 1) * px.TILE_SIZE, self.pos.y,
-               1, self.imgs.x + px.TILE_SIZE * 2, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
+            px.blt(self.pos.x + (self.width - 1) * px.TILE_SIZE, self.pos.y,
+                   1, self.imgs.x + px.TILE_SIZE * 2, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
 
     def under(self, rect: Rectangle) -> bool:
         return self.rect.under(rect)
-
+    
     def collide(self, rect: Rectangle) -> bool:
         return self.rect.collide(rect)
 
@@ -76,6 +76,8 @@ class Level:
                 elif tile == (4, 1):
                     self.killer.append(Plateform(Pos(4, 1), Pos(u, v), 255, False))
 
+                elif tile == (4, 2):
+                    self.target = Plateform(Pos(4, 2), Pos(u, v), 1, False)
 
                 elif tile == (0, 1):
                     self.init_player = px.TILE_SIZE * Pos(u, v)
@@ -89,6 +91,8 @@ class Level:
 
         for kill in self.killer:
             kill.draw()
+
+        self.target.draw()
 
         self.player.draw()
 
