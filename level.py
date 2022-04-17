@@ -27,10 +27,12 @@ class Plateform:
         px.blt(self.pos.x + (self.width - 1) * px.TILE_SIZE, self.pos.y,
                1, self.imgs.x + px.TILE_SIZE * 2, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
 
+    def under(self, rect: Rectangle) -> bool:
+        return self.rect.under(rect)
 
-class killer:
-    def __init__(self) -> None:
-        self.pos = pos
+    def collide(self, rect: Rectangle) -> bool:
+        return self.rect.collide(rect)
+
 class Level:
     IGNORE_TILE = [(0, 0), (4, 0)]
     def __init__(self, tilemap: Union[px.Tilemap, int], goaly: float):
