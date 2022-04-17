@@ -3,7 +3,7 @@ import pyxel as px
 from typing import Union
 
 from lib import Pos, posT, Rectangle
-from player import Player
+import player
 
 class Plateform:
     def __init__(self, imgs: Pos, pos:Pos, width: int) -> None:
@@ -72,7 +72,7 @@ class Level:
 
                 elif tile == (0, 1):
                     self.init_player = px.TILE_SIZE * Pos(u, v)
-                    self.player = Player(self.init_player, self)
+                    self.player = player.Player(self.init_player, self)
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
 
@@ -92,7 +92,7 @@ class Level:
         px.camera(camera_x, self.pos.y)
     
     def victory(self):
-        return self.pos.y >= self.goaly
+        return self.player.victory
 
 
 if __name__ == "__main__":
