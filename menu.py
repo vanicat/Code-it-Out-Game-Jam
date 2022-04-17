@@ -3,10 +3,7 @@ import pyxel as px
 
 class MainMenu:
     def __init__(self) -> None:
-        self.selected = 0
-
-        self.started = False
-        self.action = [self.start, self.quit]
+        self.action = [self.start_game, self.quit]
 
     def draw(self):
         px.text(10, 10, "long press on space for next item", px.COLOR_RED)
@@ -17,24 +14,32 @@ class MainMenu:
         px.text(10, 60, "quit", px.COLOR_RED)
 
     def udpate(self):
-        if px.btnp(px.KEY_SPACE):
-            self.start_press = px.frame_count
-        if px.btn(px.KEY_SPACE):
-            time = px.frame_count - self.start_press
-            if time > 15:
-                self.selected = (self.selected + 1) % len(self.action)
+        if px.frame_count > self.starting_time + 5:
+            if px.btnp(px.KEY_SPACE):
                 self.start_press = px.frame_count
 
-        if px.btnr(px.KEY_SPACE):
-            time = px.frame_count - self.start_press
-            if time < 10:
-                self.action[self.selected]()
+            if px.btn(px.KEY_SPACE):
+                time = px.frame_count - self.start_press
+                if time > 15:
+                    self.selected = (self.selected + 1) % len(self.action)
+                    self.start_press = px.frame_count
 
-    def start(self):
+            if px.btnr(px.KEY_SPACE):
+                time = px.frame_count - self.start_press
+                if time < 10:
+                    self.action[self.selected]()
+
+    def start_game(self):
         self.started = True
 
     def quit(self):
         px.quit()
+
+    def start(self):
+        self.selected = 0
+
+        self.started = False
+        self.starting_time = px.frame_count
 
     def victory(self):
         return self.started
@@ -44,7 +49,7 @@ class MainMenu:
 
 class Victory:
     def __init__(self) -> None:
-        self.again = False
+        pass
 
     def draw(self):
         px.text(10, 50, "Victory !", px.COLOR_RED)
@@ -59,3 +64,6 @@ class Victory:
 
     def defeat(self):
         return False
+
+    def start(self):
+        self.again = False

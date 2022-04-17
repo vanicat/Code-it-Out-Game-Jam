@@ -36,12 +36,14 @@ class Level:
         else:
             self.tilemap = tilemap
         self.goaly = goaly
-        self.pos = Pos(0, 0)
 
         self.plateform = []
         self.killer = []
 
         self.init_from_tile_map()
+    
+    def start(self):
+        self.pos = Pos(0, 0)
 
     def init_from_tile_map(self):
         plt_start = False

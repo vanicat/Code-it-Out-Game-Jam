@@ -10,6 +10,7 @@ class App:
 
         self.levels = [menu.MainMenu(), level.Level(0, 250), menu.Victory()]
         self._curlevel = 0
+        self.curlevel.start()
 
         px.run(self.update, self.draw)
     
@@ -24,6 +25,7 @@ class App:
                 self._curlevel += 1
             else:
                 self._curlevel = 0
+            self.curlevel.start()
 
     def draw(self):
         px.cls(0)
