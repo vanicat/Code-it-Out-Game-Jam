@@ -37,8 +37,6 @@ class Level:
 
         self.init_from_tile_map()
 
-        self.started = False
-
     def init_from_tile_map(self):
         plt_start = False
         for u in range(px.TILEMAP_SIZE):
@@ -63,17 +61,12 @@ class Level:
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
 
-    def start(self):
-        self.started = True
-
     def draw(self):
         for plt in self.plateform:
             plt.draw()
         self.player.draw()
 
     def udpate(self):
-        if self.started:
-            self.pos.x += 1
         self.player.update()
     
     def victory(self):
