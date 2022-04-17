@@ -6,9 +6,9 @@ import menu
 class App:
     def __init__(self):
         px.init(160, 120)
-        px.load("main.pyxres")
+        px.load("assets/main.pyxres")
 
-        self.levels = [menu.MainMenu(), level.Level(0, 250), menu.Victory()]
+        self.levels:list[level.Level] = [menu.MainMenu(), level.Level(0, 250), menu.Victory()]
         self._curlevel = 0
         self.curlevel.start()
 
