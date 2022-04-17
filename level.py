@@ -1,5 +1,5 @@
 import pyxel as px
-from lib import Pos
+from lib import Pos, posT
 from typing import Union
 
 class Plateform:
@@ -19,8 +19,6 @@ class Plateform:
                 1, self.imgs.x + px.TILE_SIZE, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
         px.blt(self.pos.x + (self.width - 1) * px.TILE_SIZE, self.pos.y,
                1, self.imgs.x + px.TILE_SIZE * 2, self.imgs.y, px.TILE_SIZE, px.TILE_SIZE)
-        
-
 
 
 class Level:
@@ -31,14 +29,36 @@ class Level:
             self.tilemap = tilemap
         self.goaly = goaly
         self.pos = Pos(0, 0)
-        self.plateform = [Plateform(Pos(8, 0), self.pos, 3)]
+
+        self.plateform = []
+
+        plt_start = False
+        for u in range(px.TILEMAP_SIZE):
+            for v in range(px.TILEMAP_SIZE):
+                tile = self.tilemap.pget(u, v)
+                if tile == (0, 0):pass
+                elif tile == (1, 0):
+                    # start of plateform
+                    plt_start = (u, v)
+                    plt_width = 1
+                elif tile == (2, 0):
+                    # plateform continuing
+                    assert plt_start
+                    plt_width += 1
+                elif tile == (3, 0):
+                    assert plt_start
+                    # stop of a plateform
+                    self.plateform.append(Plateform(Pos(8, 0), px.TILE_SIZE * posT(plt_start), plt_width))
+                    plt_start = False
+                else:
+                    print("unkwon tile", tile, "at", u, ",", v)
+
         self.started = False
 
     def start(self):
         self.started = True
 
     def draw(self):
-        px.bltm(0, 0, self.tilemap, self.pos.x, self.pos.y, px.width, px.height, 0)
         for plt in self.plateform:
             plt.draw()
 
