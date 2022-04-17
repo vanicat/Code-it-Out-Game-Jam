@@ -49,6 +49,7 @@ class Level:
     
     def start(self):
         px.load("assets/main.pyxres")
+        self.surrender = False
         self.plateform = []
         self.killer = []
 
@@ -106,12 +107,15 @@ class Level:
 
         camera_x = max(0, self.player.pos.x - 3 * px.TILE_SIZE)
         px.camera(camera_x, self.pos.y)
+
+        if px.btnp(px.KEY_B):
+            self.surrender = True
     
     def victory(self):
         return self.player.victory
 
     def defeat(self):
-        return self.player.life == 0
+        return self.surrender
 
 
 if __name__ == "__main__":
