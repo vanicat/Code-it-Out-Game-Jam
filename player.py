@@ -39,7 +39,7 @@ class Player:
             self.falling = True
 
             for plt in self.level.plateform:
-                if plt.rect.under(self):
+                if plt.under(self):
                     self.falling = False
                     self.jump = None
                     self.jump_left = self.NB_JUMP
@@ -47,7 +47,7 @@ class Player:
 
 
             for kill in self.level.killer:
-                if kill.rect.under(self):
+                if kill.collide(self):
                     self.reset()
 
             if self.level.target.collide(self):
