@@ -32,6 +32,11 @@ class Level:
 
         self.plateform = []
 
+        self.init_from_tile_map()
+
+        self.started = False
+
+    def init_from_tile_map(self):
         plt_start = False
         for u in range(px.TILEMAP_SIZE):
             for v in range(px.TILEMAP_SIZE):
@@ -52,8 +57,6 @@ class Level:
                     plt_start = False
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
-
-        self.started = False
 
     def start(self):
         self.started = True
