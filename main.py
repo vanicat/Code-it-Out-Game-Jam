@@ -12,12 +12,13 @@ class App:
 
         px.run(self.update, self.draw)
     
+    @property
     def curlevel(self):
         return self.levels[self._curlevel]
 
     def update(self):
-        self.curlevel().udpate()
-        if self.curlevel().victory():
+        self.curlevel.udpate()
+        if self.curlevel.victory():
             if self._curlevel + 1 < len(self.levels):
                 self._curlevel += 1
             else:
@@ -25,7 +26,7 @@ class App:
 
     def draw(self):
         px.cls(0)
-        self.curlevel().draw()
+        self.curlevel.draw()
 
 if __name__ == "__main__":
     App()
