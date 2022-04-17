@@ -8,8 +8,9 @@ class Player:
     SIZE = px.TILE_SIZE * 2
     GRAVITY = Pos(0, 2)
 
-    def __init__(self, pos):
+    def __init__(self, pos, level: "Level"):
         self.pos = pos
+        self.level = level
 
     def update(self):
         if self.falling():

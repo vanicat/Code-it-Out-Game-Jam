@@ -59,7 +59,7 @@ class Level:
                     self.plateform.append(Plateform(Pos(8, 0), px.TILE_SIZE * posT(plt_start), plt_width))
                     plt_start = False
                 elif tile == (0, 1):
-                    self.player = Player(px.TILE_SIZE * Pos(u, v))
+                    self.player = Player(px.TILE_SIZE * Pos(u, v), self)
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
 
