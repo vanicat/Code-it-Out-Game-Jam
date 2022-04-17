@@ -25,6 +25,7 @@ class App:
                 self._curlevel += 1
             else:
                 self._curlevel = 0
+            px.camera()
             self.curlevel.start()
 
     def draw(self):
