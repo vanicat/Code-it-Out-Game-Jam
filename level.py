@@ -1,6 +1,8 @@
 import pyxel as px
-from lib import Pos, posT
 from typing import Union
+
+from lib import Pos, posT
+from player import Player
 
 class Plateform:
     def __init__(self, imgs: Pos, pos:Pos, width: int) -> None:
@@ -55,6 +57,8 @@ class Level:
                     # stop of a plateform
                     self.plateform.append(Plateform(Pos(8, 0), px.TILE_SIZE * posT(plt_start), plt_width))
                     plt_start = False
+                elif tile == (0, 1):
+                    self.player = Player(px.TILE_SIZE * Pos(u, v))
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
 
@@ -64,10 +68,12 @@ class Level:
     def draw(self):
         for plt in self.plateform:
             plt.draw()
+        self.player.draw()
 
     def udpate(self):
         if self.started:
             self.pos.x += 1
+        self.player.update()
     
     def vitory(self):
         return self.pos.y >= self.goaly
