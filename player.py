@@ -33,13 +33,18 @@ class Player:
 
     def start(self):
         self.started = True
+        self.falling = True
+
 
     def update(self):
         if self.started:
+            was_falling = self.falling
             self.falling = True
 
             for plt in self.level.plateform:
                 if plt.under(self):
+                    if was_falling:
+                        px.play(0,3)
                     self.falling = False
                     self.jump = None
                     self.jump_left = self.NB_JUMP
@@ -53,6 +58,7 @@ class Player:
 
             if self.level.target.collide(self):
                 self.victory = True
+                px.play(0, 2)
 
             if self.falling:
                 self.pos += self.GRAVITY
