@@ -81,6 +81,6 @@ Both can be given as an tupple or a two number"""
         return (
             rect.left <= self.right and 
             rect.right >= self.left and 
-            self.top - 1 <= rect.bottom <= self.bottom
+            self.top - 1 <= rect.bottom <= self.top + 2
         )
 
