@@ -62,7 +62,10 @@ class Player(Moving):
                     px.play(0, 1)
 
             for monster in self.level.monster:
-                if monster.collide(self):
+                if monster.under(self):
+                    px.play(0, 4)
+                    monster.temp_death = True
+                elif monster.collide(self):
                     self.level.death(monster)
                     px.play(0, 1)
 
