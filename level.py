@@ -52,6 +52,9 @@ class Level:
         self.surrender = False
         self.plateform = []
         self.killer = []
+        self.monster = []
+        self.drawable = []
+        self.updable = []
 
         self.init_from_tile_map()
         self.pos = Pos(0, 0)
@@ -76,32 +79,36 @@ class Level:
                 elif tile == (3, 0):
                     assert plt_start, f"end without start ({u}, {v})"
                     # stop of a plateform
-                    self.plateform.append(Plateform(Pos(1, 0), plt_start, plt_width + 1))
+                    plt = Plateform(Pos(1, 0), plt_start, plt_width + 1)
+                    self.drawable.append(plt)
+                    self.plateform.append(plt)
                     plt_start = False
 
                 elif tile == (4, 1):
-                    self.killer.append(Plateform(Pos(4, 1), Pos(u, v), 255, False))
+                    kill = Plateform(Pos(4, 1), Pos(u, v), 255, False)
+                    self.drawable.append(kill)
+                    self.killer.append(kill)
 
                 elif tile == (4, 2):
-                    self.target = Plateform(Pos(4, 2), Pos(u, v), 1, False)
+                    target = Plateform(Pos(4, 2), Pos(u, v), 1, False)
+                    self.drawable.append(target)
+                    self.target = target
+
 
                 elif tile == (0, 1):
                     self.player = player.Player(Pos(u, v), self)
+                    self.drawable.append(self.player) # player si updable, but must be update last
                 else:
                     print("unkwon tile", tile, "at", u, ",", v)
 
     def draw(self):
-        for plt in self.plateform:
-            plt.draw()
-
-        for kill in self.killer:
-            kill.draw()
-
-        self.target.draw()
-
-        self.player.draw()
+        for drawable in self.drawable:
+            drawable.draw()
 
     def udpate(self):
+        for updable in self.updable:
+            updable.update()
+
         self.player.update()
 
         camera_x = max(0, self.player.pos.x - 3 * px.TILE_SIZE)
