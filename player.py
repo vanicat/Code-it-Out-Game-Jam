@@ -2,8 +2,9 @@ import pyxel as px
 import level
 
 from lib import Pos
+from moving import Moving
 
-class Player:
+class Player(Moving):
     IMGX = 0
     IMGY = px.TILE_SIZE * 2
     HEIGHT = px.TILE_SIZE * 2
@@ -13,27 +14,22 @@ class Player:
     NB_JUMP = 2
     JUMP_GRAVITY = 0.5
     START_SPEED = Pos(2, 0)
+    NB_FRAME = 3
+    last_plt: "level.Plateform"
 
     def __init__(self, pos, level: "level.Level"):
-        self.init_pos = px.TILE_SIZE * pos
-        self.level = level
-        self.rect = self
-        self.last_plt = None
+        super().__init__(pos, level)
 
-        self.reset()
-
+    def full_reset(self):
+        pass
 
     def reset(self, full = False):
-        self.pos = self.init_pos.copy()
-        self.speed = self.START_SPEED.copy()
+        super().reset(full)
 
         self.jump = None
         self.jump_left = self.NB_JUMP
 
-        self.started = False
         self.victory = False
-        if full:
-            self.life = 10
 
     def start(self):
         self.started = True
@@ -60,7 +56,11 @@ class Player:
                 if kill.collide(self):
                     self.level.death(self.last_plt)
                     px.play(0, 1)
-                    self.life -= 1
+
+            for monster in self.level.monster:
+                if monster.collide(self):
+                    self.level.death(monster)
+                    px.play(0, 1)
 
             if self.level.target.collide(self):
                 self.victory = True
@@ -85,31 +85,6 @@ class Player:
             if px.btnp(px.KEY_SPACE):
                 self.start()
                 self.level.start()
-
-    @property
-    def bottom(self):
-        return self.pos.y + self.HEIGHT
-
-    @bottom.setter
-    def bottom(self, y):
-        self.pos.y = y - self.HEIGHT
-
-    @property
-    def top(self):
-        return self.pos.y
-        
-    @property
-    def left(self):
-        return self.pos.x
-    
-    @property
-    def right(self):
-        return self.pos.x + self.WIDTH
-
-    def draw(self):
-        nbimg = (px.frame_count // 4) % 3
-        px.blt(self.pos.x, self.pos.y, 0, self.IMGX + self.WIDTH * nbimg, self.IMGY, self.WIDTH, self.HEIGHT, px.COLOR_BLACK)
-
 
 if __name__ == "__main__":
     import main

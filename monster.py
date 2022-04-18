@@ -1,58 +1,23 @@
 import pyxel as px
 import level
 
-from lib import Pos
+from lib import Pos, Rectangle
+from moving import Moving
 
-class Monster:
+class Monster(Moving):
     IMGX = 0
     IMGY = px.TILE_SIZE * 4 # may be a parameter
     HEIGHT = 5
     WIDTH  = px.TILE_SIZE
     START_SPEED = Pos(-2, 0) # may be a parameter
+    START_LIFE = 10
+    NB_FRAME = 4
 
-    def __init__(self, pos):
-        self.init_pos = px.TILE_SIZE * pos
-        self.rect = self
-        self.reset()
+    def __init__(self, pos, level):
+        super().__init__(pos, level)
 
-
-    def reset(self, full = False):
-        self.pos = self.init_pos.copy()
-        self.speed = self.START_SPEED.copy()
-
-        self.started = False
-
-    def start(self):
-        self.started = True
-
-
-    def update(self):
-        if self.started:
-            self.pos += self.speed
-
-    @property
-    def bottom(self):
-        return self.pos.y + self.HEIGHT
-
-    @bottom.setter
-    def bottom(self, y):
-        self.pos.y = y - self.HEIGHT
-
-    @property
-    def top(self):
-        return self.pos.y
-        
-    @property
-    def left(self):
-        return self.pos.x
-    
-    @property
-    def right(self):
-        return self.pos.x + self.WIDTH
-
-    def draw(self):
-        nbimg = (px.frame_count // 4) % 4
-        px.blt(self.pos.x, self.pos.y, 0, self.IMGX + self.WIDTH * nbimg, self.IMGY, self.WIDTH, self.HEIGHT, px.COLOR_BLACK)
+    def full_reset(self):
+        self.life = self.START_LIFE
 
 
 if __name__ == "__main__":

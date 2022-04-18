@@ -105,7 +105,7 @@ class Level:
                     self.target = target
 
                 elif tile == (6, 0):
-                    m = monster.Monster(Pos(u, v))
+                    m = monster.Monster(Pos(u, v), self)
                     self.drawable.append(m)
                     self.updable.append(m)
                     self.monster.append(m)
