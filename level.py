@@ -94,6 +94,11 @@ class Level:
                     self.drawable.append(target)
                     self.target = target
 
+                elif tile == (6, 0):
+                    m = monster.Monster(Pos(u, v))
+                    self.drawable.append(m)
+                    self.updable.append(m)
+                    self.monster.append(m)
 
                 elif tile == (0, 1):
                     self.player = player.Player(Pos(u, v), self)
