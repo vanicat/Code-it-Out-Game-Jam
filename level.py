@@ -1,12 +1,13 @@
 import pyxel as px
 from typing import Union, List
 
-from lib import Pos, posT, Rectangle
+from lib import Pos, posT, Rectangle, Number
 import player
 import monster
 
 class Plateform:
     GROW_ON_FAIL = 1/8
+    width: Number
 
     def __init__(self, imgs: Pos, pos:Pos, width: int, ended = True) -> None:
         self.imgs = px.TILE_SIZE * imgs
