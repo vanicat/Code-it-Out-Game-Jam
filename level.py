@@ -43,7 +43,7 @@ class Plateform:
 
 
 class Level:
-    IGNORE_TILE = [(0, 0), (4, 0)]
+    IGNORE_TILE = [(0, 0), (4, 0), (5, 1)]
     plateform: List[Plateform]
     killer: List[Plateform]
     death_counter: int
