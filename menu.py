@@ -48,7 +48,7 @@ class MainMenu:
     def quit(self) -> None:
         px.quit()
 
-    def reset(self) -> None:
+    def reset(self, score) -> None:
         self.selected = 0
 
         self.started = False
@@ -65,8 +65,9 @@ class Victory:
         pass
 
     def draw(self) -> None:
-        px.text(10, 50, "Victory !", px.COLOR_RED)
-        px.text(10, 60, "Space to start agaim", px.COLOR_RED)
+        px.text(10, 45, "Victory !", px.COLOR_RED)
+        px.text(10, 55, f"Total Death Count: {self.score}", px.COLOR_RED)
+        px.text(10, 80, "Space to start agaim", px.COLOR_RED)
 
     def udpate(self) -> None:
         if px.btnp(px.KEY_SPACE):
@@ -78,5 +79,6 @@ class Victory:
     def defeat(self) -> bool:
         return False
 
-    def reset(self) -> None:
+    def reset(self, score) -> None:
         self.again = False
+        self.score = score

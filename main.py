@@ -15,7 +15,7 @@ class App:
             menu.Victory()
         ]
         self._curlevel = 0
-        self.curlevel.reset()
+        self.curlevel.reset(0)
 
         px.run(self.update, self.draw)
     
@@ -23,18 +23,20 @@ class App:
     def curlevel(self):
         return self.levels[self._curlevel]
 
-    @curlevel.setter
-    def curlevel(self, new):
+    def set_curlevel(self, new, score):
         self._curlevel = new
         px.camera()
-        self.curlevel.reset()
+        if score is True:
+            score = 0
+        self.curlevel.reset(score)
 
     def update(self):
         self.curlevel.udpate()
-        if self.curlevel.victory():
-            self.curlevel = (self._curlevel + 1) % len(self.levels)
+        v = self.curlevel.victory()
+        if v:
+            self.set_curlevel((self._curlevel + 1) % len(self.levels), v)
         elif self.curlevel.defeat():
-            self.curlevel = 0
+            self.set_curlevel(0, 0)
 
     def draw(self):
         px.cls(0)

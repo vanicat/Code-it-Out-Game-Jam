@@ -87,10 +87,10 @@ class Level:
         else:
             self.tilemap = tilemap
     
-    def reset(self):
+    def reset(self, score):
         px.load("assets/main.pyxres")
         self.surrender = False
-        self.death_counter = 0
+        self.death_counter = score
         self.plateform = []
         self.killer = []
         self.monster = []
@@ -201,7 +201,7 @@ class Level:
 
 
     def victory(self):
-        return self.player.victory
+        return self.player.victory and (self.death_counter == 0 or self.death_counter)
 
     def defeat(self):
         return self.surrender
