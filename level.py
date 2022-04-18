@@ -3,6 +3,7 @@ from typing import Union, List
 
 from lib import Pos, posT, Rectangle
 import player
+import monster
 
 class Plateform:
     def __init__(self, imgs: Pos, pos:Pos, width: int, ended = True) -> None:
@@ -122,6 +123,17 @@ class Level:
         if px.btnp(px.KEY_B):
             self.surrender = True
     
+    def start(self):
+        for m in self.monster:
+            m.start()
+
+    def death(self, killer):
+        for m in self.monster:
+            m.reset()
+        
+        self.player.reset()
+
+
     def victory(self):
         return self.player.victory
 

@@ -59,7 +59,7 @@ class Player:
 
             for kill in self.level.killer:
                 if kill.collide(self):
-                    self.reset()
+                    self.level.death(self.last_plt)
                     px.play(0, 1)
                     self.last_plt.width += self.GROW_ON_FAIL
                     self.life -= 1
@@ -86,6 +86,7 @@ class Player:
         else:
             if px.btnp(px.KEY_SPACE):
                 self.start()
+                self.level.start()
 
     @property
     def bottom(self):
