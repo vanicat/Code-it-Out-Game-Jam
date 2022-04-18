@@ -10,7 +10,7 @@ class App:
 
         self.levels:list[level.Level] = [menu.MainMenu(), level.Level(0, 250), menu.Victory()]
         self._curlevel = 0
-        self.curlevel.start()
+        self.curlevel.reset()
 
         px.run(self.update, self.draw)
     
@@ -22,7 +22,7 @@ class App:
     def curlevel(self, new):
         self._curlevel = new
         px.camera()
-        self.curlevel.start()
+        self.curlevel.reset()
 
     def update(self):
         self.curlevel.udpate()

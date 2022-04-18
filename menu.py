@@ -39,7 +39,7 @@ class MainMenu:
     def quit(self) -> None:
         px.quit()
 
-    def start(self) -> None:
+    def reset(self) -> None:
         self.selected = 0
 
         self.started = False
@@ -69,5 +69,5 @@ class Victory:
     def defeat(self) -> bool:
         return False
 
-    def start(self) -> None:
+    def reset(self) -> None:
         self.again = False

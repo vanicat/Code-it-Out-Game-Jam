@@ -47,7 +47,7 @@ class Level:
         self.goaly = goaly
 
     
-    def start(self):
+    def reset(self):
         px.load("assets/main.pyxres")
         self.surrender = False
         self.plateform = []
