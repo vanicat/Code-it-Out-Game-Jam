@@ -19,6 +19,10 @@ class Monster(Moving):
     def full_reset(self):
         self.life = self.START_LIFE
 
+    def update(self):
+        player_pos = self.level.player.pos
+        if player_pos.x - px.width < self.pos.x < player_pos.x + px.width:
+            super().update()
 
     @property
     def alive(self):
