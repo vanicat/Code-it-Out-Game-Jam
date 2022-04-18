@@ -1,3 +1,4 @@
+from email import message
 from platform import release
 import pyxel as px
 from lib import Number
@@ -10,12 +11,20 @@ class MainMenu:
         self.action = [self.start_game, self.quit]
 
     def draw(self):
-        px.text(10, 10, "long press on space for next item", px.COLOR_RED)
-        px.text(10, 20, "short press to select", px.COLOR_RED)
+        messages = [
+            "The more you try, the easier it is, ",
+            "mostly",
+            "",
+            "long press on space for next item",
+            "short press to select",
+            "then, space to jump"
+        ]
+        for i in range(len(messages)):
+            px.text(10, 10 + i * 10, messages[i], px.COLOR_RED)
 
-        px.rect(10, 47 + 10 * self.selected, px.width - 20, 10, px.COLOR_WHITE)
-        px.text(10, 50, "start game", px.COLOR_RED)
-        px.text(10, 60, "quit", px.COLOR_RED)
+        px.rect(10, 27 + i * 10 + 10 * self.selected, px.width - 20, 10, px.COLOR_WHITE)
+        px.text(10, 30 + i * 10, "start game", px.COLOR_DARK_BLUE)
+        px.text(10, 40 + i * 10, "quit", px.COLOR_DARK_BLUE)
 
     def udpate(self) -> None:
         if px.frame_count > self.starting_time + 5:
