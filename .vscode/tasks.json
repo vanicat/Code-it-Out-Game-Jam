@@ -7,6 +7,14 @@
             "label": "build main using nuitka",
             "type": "shell",
             "command": "python -m nuitka --onefile --windows-disable-console --disable-ccache --include-data-dir=assets=assets main.py"
+        },
+        {
+            "label": "check with mypy",
+            "type": "shell",
+            "command": "python -m mypy '${relativeFile}'",
+            "problemMatcher": [
+                "$jshint"
+            ]
         }
     ]
 }
