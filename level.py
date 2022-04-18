@@ -67,6 +67,8 @@ class Level:
         self.init_from_tile_map()
         self.pos = Pos(0, 0)
         self.player.reset(True)
+        for m in self.monster:
+            m.reset(True)
 
     def init_from_tile_map(self):
         plt_start = False
