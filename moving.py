@@ -43,6 +43,9 @@ class Moving(ABC):
     def collide(self, rect):
         return self.alive and self.rect.collide(rect)
 
+    def under(self, rect):
+        return self.alive and self.rect.under(rect)
+
     @property
     def rect(self):
         return Rectangle(self.pos, self.WIDTH, self.HEIGHT)
