@@ -23,6 +23,10 @@ class Player(Moving):
     def full_reset(self):
         pass
 
+    @property
+    def alive(self):
+        return True
+
     def reset(self, full = False):
         super().reset(full)
 

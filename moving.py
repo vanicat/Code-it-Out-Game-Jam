@@ -16,6 +16,11 @@ class Moving(ABC):
         self.level = level
         self.reset()
 
+    @property
+    @abstractmethod
+    def alive(self):
+        pass
+    
     @abstractmethod
     def full_reset(self):
         pass

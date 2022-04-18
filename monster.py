@@ -20,6 +20,13 @@ class Monster(Moving):
         self.life = self.START_LIFE
 
 
+    @property
+    def alive(self):
+        return self.life > 0
+
+    def make_easier(self) -> None:
+        self.life -= 1
+
 if __name__ == "__main__":
     import main
 
