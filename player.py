@@ -39,22 +39,14 @@ class Player(Moving):
         self.started = True
         self.falling = True
 
-
     def update(self):
         if self.started:
-            was_falling = self.falling
+            self.was_falling = self.falling
             self.falling = True
 
             for plt in self.level.plateform:
                 if plt.under(self):
-                    if was_falling:
-                        px.play(0,3)
-                    self.falling = False
-                    self.jump = None
-                    self.jump_left = self.NB_JUMP
-                    self.bottom = plt.rect.top
-                    self.last_plt = plt
-
+                    self.on_ground(plt)
 
             for kill in self.level.killer:
                 if kill.collide(self):
@@ -66,6 +58,12 @@ class Player(Moving):
                     monster.temp_death = True
                 elif monster.collide(self):
                     self.level.death(monster)
+
+            for wall in self.level.wall:
+                if wall.rect.under(self):
+                    self.on_ground(wall)
+                elif wall.collide(self):
+                    self.level.death(wall)
 
             if self.level.target.collide(self):
                 self.victory = True
@@ -90,6 +88,15 @@ class Player(Moving):
             if px.btnp(px.KEY_SPACE):
                 self.start()
                 self.level.start()
+
+    def on_ground(self, plt):
+        if self.was_falling:
+            px.play(0,3)
+        self.falling = False
+        self.jump = None
+        self.jump_left = self.NB_JUMP
+        self.bottom = plt.rect.top
+        self.last_plt = plt
 
 if __name__ == "__main__":
     import main
