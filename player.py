@@ -13,7 +13,6 @@ class Player:
     NB_JUMP = 2
     JUMP_GRAVITY = 0.5
     START_SPEED = Pos(2, 0)
-    GROW_ON_FAIL = 1/8
 
     def __init__(self, pos, level: "level.Level"):
         self.init_pos = px.TILE_SIZE * pos
@@ -61,7 +60,6 @@ class Player:
                 if kill.collide(self):
                     self.level.death(self.last_plt)
                     px.play(0, 1)
-                    self.last_plt.width += self.GROW_ON_FAIL
                     self.life -= 1
 
             if self.level.target.collide(self):

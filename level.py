@@ -6,6 +6,8 @@ import player
 import monster
 
 class Plateform:
+    GROW_ON_FAIL = 1/8
+
     def __init__(self, imgs: Pos, pos:Pos, width: int, ended = True) -> None:
         self.imgs = px.TILE_SIZE * imgs
         self.pos = px.TILE_SIZE * pos
@@ -34,6 +36,10 @@ class Plateform:
     
     def collide(self, rect: Rectangle) -> bool:
         return self.rect.collide(rect)
+
+    def make_easier(self) -> None:
+        self.width += self.GROW_ON_FAIL
+
 
 class Level:
     IGNORE_TILE = [(0, 0), (4, 0)]
@@ -130,6 +136,8 @@ class Level:
     def death(self, killer):
         for m in self.monster:
             m.reset()
+
+        killer.make_easier()
         
         self.player.reset()
 
