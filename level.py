@@ -46,6 +46,7 @@ class Level:
     IGNORE_TILE = [(0, 0), (4, 0)]
     plateform: List[Plateform]
     killer: List[Plateform]
+    death_counter: int
 
     def __init__(self, tilemap: Union[px.Tilemap, int], goaly: float):
         if isinstance(tilemap, int):
@@ -58,6 +59,7 @@ class Level:
     def reset(self):
         px.load("assets/main.pyxres")
         self.surrender = False
+        self.death_counter = 0
         self.plateform = []
         self.killer = []
         self.monster = []
@@ -117,8 +119,14 @@ class Level:
                     print("unkwon tile", tile, "at", u, ",", v)
 
     def draw(self):
+        camera_x = max(0, self.player.pos.x - 3 * px.TILE_SIZE)
+        px.camera(camera_x, self.pos.y)
+
         for drawable in self.drawable:
             drawable.draw()
+
+        px.text(camera_x + 3, self.pos.y + 3, f"death: {self.death_counter}", px.COLOR_LIGHT_BLUE)
+        
 
     def udpate(self):
         for updable in self.updable:
@@ -126,8 +134,6 @@ class Level:
 
         self.player.update()
 
-        camera_x = max(0, self.player.pos.x - 3 * px.TILE_SIZE)
-        px.camera(camera_x, self.pos.y)
 
         if px.btnp(px.KEY_B):
             self.surrender = True
@@ -138,6 +144,7 @@ class Level:
 
     def death(self, killer):
         px.play(0, 1)
+        self.death_counter += 1
         for m in self.monster:
             m.reset()
 
