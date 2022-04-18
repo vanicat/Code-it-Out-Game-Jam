@@ -10,7 +10,7 @@ class Monster(Moving):
     HEIGHT = 5
     WIDTH  = px.TILE_SIZE
     START_SPEED = Pos(-2, 0) # may be a parameter
-    START_LIFE = 10
+    START_LIFE = 4
     NB_FRAME = 4
 
     def __init__(self, pos, level):
