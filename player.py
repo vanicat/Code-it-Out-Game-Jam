@@ -27,7 +27,7 @@ class Player(Moving):
         super().reset(full)
 
         self.jump = None
-        self.jump_left = self.NB_JUMP
+        self.jump_left = 0
 
         self.victory = False
 
