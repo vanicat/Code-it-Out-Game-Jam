@@ -8,7 +8,12 @@ class App:
         px.init(160, 120)
         px.load("assets/main.pyxres")
 
-        self.levels:list[level.Level] = [menu.MainMenu(), level.Level(0), menu.Victory()]
+        self.levels:list[level.Level] = [
+            menu.MainMenu(),
+            level.Level(0),
+            level.Level(1),
+            menu.Victory()
+        ]
         self._curlevel = 0
         self.curlevel.reset()
 
