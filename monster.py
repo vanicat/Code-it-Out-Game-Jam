@@ -15,6 +15,11 @@ class Monster(Moving):
 
     def __init__(self, pos, level):
         super().__init__(pos, level)
+        self.temp_death = False
+
+    def reset(self, full = False):
+        super().reset(full)
+        self.temp_death = False
 
     def full_reset(self):
         self.life = self.START_LIFE
@@ -26,7 +31,7 @@ class Monster(Moving):
 
     @property
     def alive(self):
-        return self.life > 0
+        return self.life > 0 and not self.temp_death
 
     def make_easier(self) -> None:
         self.life -= 1
