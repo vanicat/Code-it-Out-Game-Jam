@@ -37,11 +37,11 @@ class Moving(ABC):
         self.started = True
 
     def update(self):
-        if self.started:
+        if self.started and self.alive:
             self.pos += self.speed
 
     def collide(self, rect):
-        self.rect.collide(rect)
+        return self.alive and self.rect.collide(rect)
 
     @property
     def rect(self):
@@ -68,5 +68,6 @@ class Moving(ABC):
         return self.pos.x + self.WIDTH
 
     def draw(self):
-        nbimg = (px.frame_count // 4) % self.NB_FRAME
-        px.blt(self.pos.x, self.pos.y, 0, self.IMGX + self.WIDTH * nbimg, self.IMGY, self.WIDTH, self.HEIGHT, px.COLOR_BLACK)
+        if self.alive:
+            nbimg = (px.frame_count // 4) % self.NB_FRAME
+            px.blt(self.pos.x, self.pos.y, 0, self.IMGX + self.WIDTH * nbimg, self.IMGY, self.WIDTH, self.HEIGHT, px.COLOR_BLACK)
