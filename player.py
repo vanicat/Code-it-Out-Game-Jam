@@ -16,7 +16,7 @@ class Player:
     GROW_ON_FAIL = 1/8
 
     def __init__(self, pos, level: "level.Level"):
-        self.init_pos = pos
+        self.init_pos = px.TILE_SIZE * pos
         self.level = level
         self.rect = self
         self.last_plt = None
