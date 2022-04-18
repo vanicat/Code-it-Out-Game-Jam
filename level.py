@@ -48,13 +48,11 @@ class Level:
     killer: List[Plateform]
     death_counter: int
 
-    def __init__(self, tilemap: Union[px.Tilemap, int], goaly: float):
+    def __init__(self, tilemap: Union[px.Tilemap, int]):
         if isinstance(tilemap, int):
             self.tilemap = px.tilemap(tilemap)
         else:
             self.tilemap = tilemap
-        self.goaly = goaly
-
     
     def reset(self):
         px.load("assets/main.pyxres")
