@@ -59,7 +59,6 @@ class Player(Moving):
             for kill in self.level.killer:
                 if kill.collide(self):
                     self.level.death(self.last_plt)
-                    px.play(0, 1)
 
             for monster in self.level.monster:
                 if monster.under(self):
@@ -67,7 +66,6 @@ class Player(Moving):
                     monster.temp_death = True
                 elif monster.collide(self):
                     self.level.death(monster)
-                    px.play(0, 1)
 
             if self.level.target.collide(self):
                 self.victory = True

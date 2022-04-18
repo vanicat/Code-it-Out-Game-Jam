@@ -137,6 +137,7 @@ class Level:
             m.start()
 
     def death(self, killer):
+        px.play(0, 1)
         for m in self.monster:
             m.reset()
 
